@@ -77,6 +77,7 @@ class Sidebar(QWidget):
         self.add_point_button.clicked.connect(self.on_point_added)
 
         self.item_list_container = QWidget()
+        self.item_list_container.setObjectName("item_list_container")
         self.item_list_container_layout = QVBoxLayout(self.item_list_container)
         self.item_list_container_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.item_list_container_layout.setContentsMargins(16,16,0,0)

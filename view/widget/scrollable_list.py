@@ -59,6 +59,9 @@ class ScrollableList(QWidget):
         if len(self.items) > 0:
             self.no_items_label.setVisible(False)
             self.items_list.setVisible(True)
+        else:
+            self.no_items_label.setVisible(True)
+            self.items_list.setVisible(False)
 
         for i, s in enumerate(self.items):
             delete_callback = self.delete_item if self.delete else None

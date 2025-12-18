@@ -9,35 +9,16 @@
     border: 0.8px solid #4379EE;
     border-radius: 8px;
 }      
-#roi_button, #line_profile_button, #dialog_cancel_btn {
-    background-color: #FFFFFF;
-    color: #000000;
-    padding:8px 12px;
-    border: 0.8px solid #d3d8de;
-    border-radius: 8px;
-}         
-#load_button:hover, #dialog_ok_btn:hover, #add_point_button:hover  {
+      
+#add_point_button:hover  {
     background-color: #197FE2;
 }      
-#roi_button:hover, #line_profile_button:hover, #dialog_cancel_btn:hover {
-    background-color: #E1EDF8;
-}
-#roi_button[active="true"],
-#line_profile_button[active="true"] {
-    background-color: #0071df;
-    color: white;
-    border: 0.8px solid #0071df;
-}
 
-#roi_button[active="true"]:hover,
-#line_profile_button[active="true"]:hover {
-    background-color: #197FE2;
-}
 #sidebar_main_widget{
     border-right: 0.8px solid #d3d8de;
 }
-#sidebar_buttons_container{
-    border-bottom: 0.8px solid #d3d8de;
+#item_list_container{
+    border-top: 0.8px solid #d3d8de;
 }
 
 
