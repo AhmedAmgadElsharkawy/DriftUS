@@ -1,0 +1,185 @@
+#main_widget {
+    background-color: #ffffff; 
+    font-family: "Segoe UI";
+}
+#load_button, #dialog_ok_btn, #add_point_button {
+    background-color: #0071df;
+    color: #FFFFFF;
+    padding:8px 12px;
+    border: 0.8px solid #4379EE;
+    border-radius: 8px;
+}      
+#roi_button, #line_profile_button, #dialog_cancel_btn {
+    background-color: #FFFFFF;
+    color: #000000;
+    padding:8px 12px;
+    border: 0.8px solid #d3d8de;
+    border-radius: 8px;
+}         
+#load_button:hover, #dialog_ok_btn:hover, #add_point_button:hover  {
+    background-color: #197FE2;
+}      
+#roi_button:hover, #line_profile_button:hover, #dialog_cancel_btn:hover {
+    background-color: #E1EDF8;
+}
+#roi_button[active="true"],
+#line_profile_button[active="true"] {
+    background-color: #0071df;
+    color: white;
+    border: 0.8px solid #0071df;
+}
+
+#roi_button[active="true"]:hover,
+#line_profile_button[active="true"]:hover {
+    background-color: #197FE2;
+}
+#sidebar_main_widget{
+    border-right: 0.8px solid #d3d8de;
+}
+#sidebar_buttons_container{
+    border-bottom: 0.8px solid #d3d8de;
+}
+
+
+QListWidget {
+    background: #ffffff;
+    border: none;
+    border-right: 0.8px solid #d3d8de;
+    font-size: 16px; 
+    margin: 8px 0px;
+}
+QListWidget::item {
+    margin-right: 16px;          
+}
+
+QListWidget::item:hover {
+    background: #E1EDF8;
+}
+
+QListWidget::item:selected {
+    background: #E1EDF8;
+}
+QScrollBar:vertical {
+    border: none;
+    background: transparent;
+    width: 8px;
+    margin: 4px 0;
+}
+QScrollBar::handle:vertical {
+    background: #0071df;
+    border-radius: 4px;
+    min-height: 20px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #197FE2;
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+    width: 0;
+}
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+QScrollBar:horizontal {
+    border: none;
+    background: transparent;
+    height: 8px;
+    margin: 0 4px;
+}
+QScrollBar::handle:horizontal {
+    background: #c1c1c1;
+    border-radius: 4px;
+    min-width: 20px;
+}
+QScrollBar::handle:horizontal:hover {
+    background: #a6a6a6;
+}
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    height: 0;
+    width: 0;
+}
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+#item_delete_button{
+    background-color: transparent; 
+    border:none;
+}
+
+
+#item_viewer_main_widget{
+    border: 0.8px solid #d3d8de;
+    border-radius: 14px;
+}
+
+#viewer_select_item_button{
+    border: 0.8px solid #d3d8de;
+    padding:8px 12px;
+    border-radius: 8px;
+}
+
+#viewer_select_item_button:hover {
+    background-color: #E1EDF8;
+    color: #000000;
+    padding:8px 12px;
+    border: 0.8px solid #d3d8de;
+    border-radius: 8px;
+}  
+
+#plot_main_widget{
+    border: 0.8px solid #d3d8de;
+    border-radius: 14px;
+}
+
+#quantitative_metrics_container{
+    border: 0.8px solid #d3d8de;
+    border-radius: 14px;
+}
+
+#metric_value_label{
+    color: #0071df;
+}
+
+#dialog_item_list_container{
+    border: 0.8px solid #d3d8de;
+    border-radius: 8px;
+}
+
+#dialog_preview_container{
+    border: 0.8px solid #d3d8de;
+    border-radius: 8px;
+}
+
+
+QDoubleSpinBox {
+    border: 2px solid #d3d8de; 
+    border-radius: 10px;
+    padding: 5px;
+}
+QDoubleSpinBox::up-button {
+    background: rgba(0, 0, 0, 0); 
+}
+QDoubleSpinBox::up-button:hover {
+    background: #d3d8de;
+}
+QDoubleSpinBox::up-arrow {
+    image: url(assets/icons/up-arrow.png); 
+    width: 10px;
+    height: 10px;
+}
+QDoubleSpinBox::down-button {
+    background: rgba(0, 0, 0, 0); 
+}
+QDoubleSpinBox::down-button:hover {
+    background: #d3d8de;
+}
+QDoubleSpinBox::down-arrow {
+    image: url(assets/icons/down-arrow.png);
+    width: 10px;
+    height: 10px;
+}               
