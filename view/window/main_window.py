@@ -5,7 +5,9 @@ from PyQt5.QtWidgets import (
     QHBoxLayout,
 )
 
+from view.widget.metric_widget import MetricWidget
 from view.widget.sidebar import Sidebar 
+from view.widget.image_viewer import ImageViewer
 
 from view.style_manager import apply_stylesheet
 
@@ -50,7 +52,10 @@ class MainWindow(QMainWindow):
         self.image_viewers_container_layout.setSpacing(24)
         self.body_container_layout.addWidget(self.image_viewers_container, stretch=1)
 
-        # add viewers here
+        self.phantom_image_viewer = ImageViewer(self, header= "Phantom")
+        self.reconstructed_image_viewer = ImageViewer(self, header = "Reconstructed Image")
+        self.image_viewers_container_layout.addWidget(self.phantom_image_viewer)
+        self.image_viewers_container_layout.addWidget(self.reconstructed_image_viewer)
 
         
         self.quantitative_metrics_container = QWidget()
@@ -59,9 +64,14 @@ class MainWindow(QMainWindow):
         self.quantitative_metrics_container_layout.setContentsMargins(16,16,16,16)
         self.quantitative_metrics_container_layout.setSpacing(0)
 
-        # add metrics here
-        # self.left_edge_sharpness = MetricWidget("Left Edge Sharpness")
-        # self.quantitative_metrics_container_layout.addWidget(self.left_edge_sharpness)
+        self.m1 = MetricWidget("Metric 1")
+        self.quantitative_metrics_container_layout.addWidget(self.m1)
+        self.m2 = MetricWidget("Metric 2")
+        self.quantitative_metrics_container_layout.addWidget(self.m2)
+        self.m3 = MetricWidget("Metric 3")
+        self.quantitative_metrics_container_layout.addWidget(self.m3)
+        self.m4 = MetricWidget("Metric 4")
+        self.quantitative_metrics_container_layout.addWidget(self.m4)
 
 
         self.body_container_layout.addWidget(self.quantitative_metrics_container, stretch=0)
