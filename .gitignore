@@ -1,0 +1,27 @@
+# Virtual environment
+slice_scope_venv/
+
+# Python bytecode files
+*.pyc
+__pycache__/
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+
+# Temporary files
+*.tmp
+*.temp
+tempCodeRunnerFile.python
+
+
+
+# IDE-specific settings
+*.sublime-workspace
+*.sublime-project
+
+
