@@ -1,8 +1,9 @@
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QListWidget, QAbstractItemView, QListWidgetItem
+    QWidget, QVBoxLayout, QListWidget, QAbstractItemView, QListWidgetItem, QLabel, QSizePolicy
 )
 
 from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QFont
 
 from view.widget.list_item import ListItem
 
@@ -26,12 +27,21 @@ class ScrollableList(QWidget):
         self.main_widget_layout = QVBoxLayout(self.main_widget)
         self.main_widget_layout.setContentsMargins(0,0,0,0)
         self.main_widget_layout.setSpacing(0)
+        self.main_widget_layout.setAlignment(Qt.AlignTop | Qt.AlignLeft) 
+
+        font = QFont("Segoe UI", 12)
+        font.setWeight(QFont.Weight.Light) 
+        self.no_items_label = QLabel("No points added")
+        self.no_items_label.setFont(font)
+        self.main_widget_layout.addWidget(self.no_items_label)
+        self.no_items_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
 
         self.items_list = QListWidget()
         self.items_list.setFocusPolicy(Qt.NoFocus)
         self.items_list.setSelectionMode(QAbstractItemView.NoSelection)
         self.items_list.setObjectName("item_list")
         self.main_widget_layout.addWidget(self.items_list, stretch=1)
+        self.items_list.setVisible(False)
 
         if self.selectable:
             self.items_list.setSelectionMode(
@@ -46,6 +56,10 @@ class ScrollableList(QWidget):
 
     def update_item_list(self):
         self.items_list.clear()
+        if len(self.items) > 0:
+            self.no_items_label.setVisible(False)
+            self.items_list.setVisible(True)
+
         for i, s in enumerate(self.items):
             delete_callback = self.delete_item if self.delete else None
             item_widget = ListItem(item_obj=s, delete_callback=delete_callback, index=i)
@@ -61,8 +75,8 @@ class ScrollableList(QWidget):
                 s.index = i
             self.update_item_list()
 
-    def append_items(self,new_items):
-        self.items.extend(new_items)
+    def append_item(self,new_item):
+        self.items.append(new_item)
         self.update_item_list()
 
     def set_items(self,new_items):

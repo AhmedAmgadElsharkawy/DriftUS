@@ -157,7 +157,7 @@ QScrollBar::sub-page:horizontal {
 
 
 QDoubleSpinBox {
-    border: 2px solid #d3d8de; 
+    border: 1px solid #d3d8de; 
     border-radius: 10px;
     padding: 5px;
 }

@@ -21,7 +21,7 @@ class SpinBox(QWidget):
 
 
     def value(self):
-        return self.spin_box.value()
+        return round(self.spin_box.value(), self.spin_box.decimals())
     
     def set_font(self, font):
         self.label.setFont(font)

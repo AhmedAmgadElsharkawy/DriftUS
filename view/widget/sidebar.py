@@ -6,9 +6,9 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtCore import pyqtSignal, Qt
 
 
-from view.widget.list_item import ListItem
 from view.widget.scrollable_list import ScrollableList
 from view.widget.spin_box import SpinBox
+from model.point_item import PointItem
 
 class Sidebar(QWidget):
     currentIndexChanged = pyqtSignal(int)
@@ -21,8 +21,6 @@ class Sidebar(QWidget):
 
         self.roi_enabled = False
         self.line_enabled = False
-
-        self.items = [] 
 
         self.main_window = main_window
 
@@ -76,7 +74,7 @@ class Sidebar(QWidget):
         self.add_point_button.setFont(font)
         self.add_point_button.setObjectName("add_point_button")
         self.add_point_container_layout.addWidget(self.add_point_button)
-        self.add_point_button.clicked.connect(self.handle_add_point)
+        self.add_point_button.clicked.connect(self.on_point_added)
 
         self.item_list_container = QWidget()
         self.item_list_container_layout = QVBoxLayout(self.item_list_container)
@@ -88,43 +86,21 @@ class Sidebar(QWidget):
         font = QFont("Segoe UI", 12)
         font.setWeight(QFont.Weight.Medium) 
 
-        self.item_list_header = QLabel("Loaded points")
+        self.item_list_header = QLabel("Points")
         self.item_list_header.setFont(font)
         self.item_list_container_layout.addWidget(self.item_list_header)
         self.item_list_header.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
 
-        font = QFont("Segoe UI", 12)
-        font.setWeight(QFont.Weight.Light) 
-        self.no_items_label = QLabel("No points added")
-        self.no_items_label.setFont(font)
-        self.item_list_container_layout.addWidget(self.no_items_label)
-        self.no_items_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-
         self.item_list = ScrollableList()
         self.item_list_container_layout.addWidget(self.item_list, stretch=1)
-        self.item_list.setVisible(False)
 
 
+    def on_point_added(self):
+        new_point = PointItem(
+            depth= self.depth_spin_box.value(),
+            lateral= self.lateral_spin_box.value()
+        )
+        
+        self.item_list.append_item(new_point)
 
-
-    def update_item_list(self):
-        self.item_list.clear()
-        for i, s in enumerate(self.items):
-            item_widget = ListItem(item_obj=s, delete_callback=self.delete_item, index=i)
-            item = QListWidgetItem()
-            item.setSizeHint(item_widget.sizeHint())
-            self.item_list.addItem(item)
-            self.item_list.setItemWidget(item, item_widget)
-
-    def delete_item(self, index):
-        if 0 <= index < len(self.items):
-            del self.items[index]
-            for i, s in enumerate(self.items):
-                s.index = i
-            self.update_item_list()
-
-    def handle_add_point(self):
-        depth = self.depth_spin_box.value()
-        lateral = self.lateral_spin_box.value()
-        self.point_added.emit(depth, lateral)
                 
