@@ -2,22 +2,16 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QListWidget, QAbstractItemView, QListWidgetItem, QLabel, QSizePolicy
 )
 
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 
 from view.widget.list_item import ListItem
 
-class ScrollableList(QWidget):
-    itemSelectionChanged = pyqtSignal()
-    
-    def __init__(self, selectable=False, multi_select=False, delete = True):
+class ScrollableList(QWidget):    
+    def __init__(self):
         super().__init__()
 
         self.items = []
-        self.delete = delete
-        self.selectable = selectable
-        self.multi_select = multi_select
-
         self.central_layout = QVBoxLayout(self)
         self.central_layout.setContentsMargins(0,0,0,0)
         self.central_layout.setSpacing(0)
@@ -43,16 +37,6 @@ class ScrollableList(QWidget):
         self.main_widget_layout.addWidget(self.items_list, stretch=1)
         self.items_list.setVisible(False)
 
-        if self.selectable:
-            self.items_list.setSelectionMode(
-                QAbstractItemView.MultiSelection if self.multi_select else QAbstractItemView.SingleSelection
-            )
-        else:
-            self.items_list.setSelectionMode(QAbstractItemView.NoSelection)
-
-        self.items_list.itemSelectionChanged.connect(self.itemSelectionChanged.emit)
-
-
 
     def update_item_list(self):
         self.items_list.clear()
@@ -64,7 +48,7 @@ class ScrollableList(QWidget):
             self.items_list.setVisible(False)
 
         for i, s in enumerate(self.items):
-            delete_callback = self.delete_item if self.delete else None
+            delete_callback = self.delete_item
             item_widget = ListItem(item_obj=s, delete_callback=delete_callback, index=i)
             item = QListWidgetItem()
             item.setSizeHint(item_widget.sizeHint())
@@ -86,24 +70,8 @@ class ScrollableList(QWidget):
         self.items = new_items
         self.update_item_list()
 
-
-    def selectedItems(self):
-        return self.items_list.selectedItems()
-
     def itemWidget(self, item):
         return self.items_list.itemWidget(item)
 
-    def clearSelection(self):
-        self.items_list.clearSelection()
-
-    def setSelectionMode(self, mode):
-        self.items_list.setSelectionMode(mode)
-
-    def get_selected_items(self):
-        return [
-            self.itemWidget(item).item_obj
-            for item in self.selectedItems()
-            if self.itemWidget(item) is not None
-        ]
 
 
