@@ -9,6 +9,10 @@ from view.widget.metric_widget import MetricWidget
 from view.widget.sidebar import Sidebar 
 from view.widget.image_viewer import ImageViewer
 
+from controller.phantom_controller import PhantomController
+from controller.reconstruction_controller import ReconstructionController
+from controller.metrics_controller import MetricsController
+
 from view.style_manager import apply_stylesheet
 
 class MainWindow(QMainWindow):
@@ -78,9 +82,10 @@ class MainWindow(QMainWindow):
         self.body_container_layout.addWidget(self.quantitative_metrics_container, stretch=0)
 
 
-        # add controllers here
+        self.phantom_controller = PhantomController(self)
+        self.reconstruction_controller = ReconstructionController(self)
+        self.metrics_controller = MetricsController(self)
         
-
 
         self.setMinimumWidth(800)
         self.setMinimumHeight(600)
