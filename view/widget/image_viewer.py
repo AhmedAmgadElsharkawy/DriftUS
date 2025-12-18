@@ -18,7 +18,7 @@ class ImageViewer(QWidget):
         self.central_layout.setContentsMargins(0, 0, 0, 0)
 
         self.main_widget = QWidget()
-        self.main_widget.setObjectName("viewer_main_widget")
+        self.main_widget.setObjectName("image_viewer_main_widget")
         self.main_widget_layout = QVBoxLayout(self.main_widget)
         self.main_widget_layout.setContentsMargins(16,16,16,16)
         self.main_widget_layout.setSpacing(24)
@@ -48,16 +48,9 @@ class ImageViewer(QWidget):
 
         self.data = None
 
-    def set(self, data: np.ndarray):
+    def set_image(self, data: np.ndarray):
         self.data = data
         self.image_view.setImage(data.T, autoLevels=True)
-
-        # self.image_view.getView().setLimits(
-        # xMin=0,
-        # yMin=0,
-        # xMax=data.shape[1] - 1,
-        # yMax=data.shape[0] - 1
-        # )
 
     
 

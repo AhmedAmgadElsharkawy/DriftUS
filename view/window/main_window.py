@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
         self.body_container = QWidget()
         self.body_container_layout = QVBoxLayout(self.body_container)
         self.body_container_layout.setContentsMargins(24, 24, 24, 24)
+        self.body_container_layout.setSpacing(16)
         self.main_widget_layout.addWidget(self.body_container)
 
 
@@ -81,8 +82,8 @@ class MainWindow(QMainWindow):
         
 
 
-        self.showMaximized()
         self.setMinimumWidth(800)
         self.setMinimumHeight(600)
+        self.showMaximized()
 
         apply_stylesheet(self, "light")

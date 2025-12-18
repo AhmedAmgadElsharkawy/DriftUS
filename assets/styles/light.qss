@@ -21,6 +21,10 @@
     border-top: 0.8px solid #d3d8de;
 }
 
+#image_viewer_main_widget{
+    border: 0.8px solid #d3d8de;
+    border-radius: 14px;
+}
 
 QListWidget {
     background: #ffffff;
