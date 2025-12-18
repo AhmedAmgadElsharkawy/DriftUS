@@ -1,5 +1,5 @@
 # Virtual environment
-slice_scope_venv/
+drift_us_venv/
 
 # Python bytecode files
 *.pyc

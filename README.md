@@ -18,23 +18,37 @@ demo link
 
 ## Installation
 
+
+
 1. **Clone the repository:**
 
    ``````
    git clone https://github.com/AhmedAmgadElsharkawy/DriftUS.git
    ``````
 
-2. **Install The Dependincies:**
+2. **Create Virtual Environment:**
+
+   ``````
+   python -m venv drift_us_venv
+   ``````
+
+3. **Install The Dependincies:**
     ``````
     pip install -r requirements.txt
     ``````
 
-3. **Run The App:**
+4. **Run The App:**
 
     ``````
     python main.py
     ``````
-
+> **Developer Note:**  
+> If you install any new packages while developing, make sure to activate the virtual environment and run the following command to update `requirements.txt`:
+>
+> ```bash
+> pip freeze > requirements.txt
+> ```
+> This ensures that all dependencies are correctly listed for reproducibility.
 
 ## Features  
 
