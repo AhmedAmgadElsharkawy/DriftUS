@@ -8,7 +8,10 @@ from PyQt5.QtCore import Qt, pyqtSignal
 
 from view.widget.scrollable_list import ScrollableList
 from view.widget.spin_box import SpinBox
+
 from model.point_item import PointItem
+
+from utils.toast_utils import show_toast
 
 class Sidebar(QWidget):
     speed_changed = pyqtSignal(float)
@@ -91,7 +94,7 @@ class Sidebar(QWidget):
         self.item_list_container_layout.addWidget(self.item_list_header)
         self.item_list_header.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
 
-        self.item_list = ScrollableList()
+        self.item_list = ScrollableList(self.main_window)
         self.item_list_container_layout.addWidget(self.item_list, stretch=1)
 
 
@@ -102,6 +105,8 @@ class Sidebar(QWidget):
         )
         
         self.item_list.append_item(new_point)
+
+        show_toast(self.main_window, "Point Added", f"({self.depth_spin_box.value()}, {self.lateral_spin_box.value()}) added successfully.")
 
 
     def on_speed_changed(self, speed):

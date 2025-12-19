@@ -7,6 +7,7 @@ class ReconstructionController():
         # if the phantom image data itself is needed, add signal 
 
     def apply_reconstruction(self):
-        print(self.main_window.sidebar.speed_spin_box.value())
-        print(self.main_window.sidebar.item_list.get_items())
+        # print(self.main_window.sidebar.speed_spin_box.value())
+        # print(self.main_window.sidebar.item_list.get_items())
+        pass
 

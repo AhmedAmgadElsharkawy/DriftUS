@@ -7,11 +7,15 @@ from PyQt5.QtGui import QFont
 
 from view.widget.list_item import ListItem
 
+from utils.toast_utils import show_toast
+
 class ScrollableList(QWidget):   
     items_list_updated = pyqtSignal(list)
  
-    def __init__(self):
+    def __init__(self, main_window):
         super().__init__()
+
+        self.main_window = main_window
 
         self.items = []
         self.central_layout = QVBoxLayout(self)
@@ -62,6 +66,7 @@ class ScrollableList(QWidget):
 
     def delete_item(self, index):
         if 0 <= index < len(self.items):
+            show_toast(self.main_window, "Point Deleted", f"({self.items[index].get_depth()}, {self.items[index].get_lateral()}) deleted successfully.")
             del self.items[index]
             for i, s in enumerate(self.items):
                 s.index = i
