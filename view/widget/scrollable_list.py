@@ -2,12 +2,14 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QListWidget, QAbstractItemView, QListWidgetItem, QLabel, QSizePolicy
 )
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QFont
 
 from view.widget.list_item import ListItem
 
-class ScrollableList(QWidget):    
+class ScrollableList(QWidget):   
+    items_list_updated = pyqtSignal(list)
+ 
     def __init__(self):
         super().__init__()
 
@@ -55,6 +57,9 @@ class ScrollableList(QWidget):
             self.items_list.addItem(item)
             self.items_list.setItemWidget(item, item_widget)
 
+        self.items_list_updated.emit(self.items)
+
+
     def delete_item(self, index):
         if 0 <= index < len(self.items):
             del self.items[index]
@@ -73,5 +78,7 @@ class ScrollableList(QWidget):
     def itemWidget(self, item):
         return self.items_list.itemWidget(item)
 
+    def get_items(self):
+        return self.items
 
 

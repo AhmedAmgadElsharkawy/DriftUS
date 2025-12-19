@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QListWidgetItem,
+    QWidget, QVBoxLayout, QPushButton, QHBoxLayout,
     QLabel, QSizePolicy
 )
 from PyQt5.QtGui import QFont
-from PyQt5.QtCore import pyqtSignal, Qt
+from PyQt5.QtCore import Qt
 
 
 from view.widget.scrollable_list import ScrollableList
@@ -11,10 +11,6 @@ from view.widget.spin_box import SpinBox
 from model.point_item import PointItem
 
 class Sidebar(QWidget):
-    currentIndexChanged = pyqtSignal(int)
-    point_added = pyqtSignal(float, float)
-    loadPhantomRequested = pyqtSignal()
-
     def __init__(self,main_window):
         super().__init__()
         self.setFixedWidth(330)
