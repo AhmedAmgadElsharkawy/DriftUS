@@ -2,7 +2,7 @@
     background-color: #ffffff; 
     font-family: "Segoe UI";
 }
-#load_button, #dialog_ok_btn, #add_point_button {
+#load_button, #dialog_ok_btn, #add_cyst_button {
     background-color: #0071df;
     color: #FFFFFF;
     padding:8px 12px;
@@ -10,7 +10,7 @@
     border-radius: 8px;
 }      
       
-#add_point_button:hover  {
+#add_cyst_button:hover  {
     background-color: #197FE2;
 }      
 

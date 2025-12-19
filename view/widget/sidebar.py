@@ -9,7 +9,7 @@ from PyQt5.QtCore import Qt, pyqtSignal
 from view.widget.scrollable_list import ScrollableList
 from view.widget.spin_box import SpinBox
 
-from model.point_item import PointItem
+from model.cyst_item import CystItem
 
 from utils.toast_utils import show_toast
 
@@ -50,33 +50,36 @@ class Sidebar(QWidget):
         self.speed_spin_box.set_font(font)
         self.controls_container_layout.addWidget(self.speed_spin_box)
 
-        self.add_point_container = QWidget()
-        self.add_point_container.setObjectName("sidebar_buttons_container")
-        self.add_point_container_layout = QVBoxLayout(self.add_point_container)
-        self.add_point_container_layout.setContentsMargins(0,0,0,0)
-        self.add_point_container_layout.setSpacing(8)
-        self.controls_container_layout.addWidget(self.add_point_container)
+        self.add_cyst_container = QWidget()
+        self.add_cyst_container.setObjectName("sidebar_buttons_container")
+        self.add_cyst_container_layout = QVBoxLayout(self.add_cyst_container)
+        self.add_cyst_container_layout.setContentsMargins(0,0,0,0)
+        self.add_cyst_container_layout.setSpacing(8)
+        self.controls_container_layout.addWidget(self.add_cyst_container)
 
-        self.add_point_inputs_container = QWidget()
-        self.add_point_inputs_container_layout = QHBoxLayout(self.add_point_inputs_container)
-        self.add_point_inputs_container_layout.setContentsMargins(0,0,0,0)
-        self.add_point_inputs_container_layout.setSpacing(8)
-        self.add_point_container_layout.addWidget(self.add_point_inputs_container)
+        self.add_cyst_inputs_container = QWidget()
+        self.add_cyst_inputs_container_layout = QHBoxLayout(self.add_cyst_inputs_container)
+        self.add_cyst_inputs_container_layout.setContentsMargins(0,0,0,0)
+        self.add_cyst_inputs_container_layout.setSpacing(8)
+        self.add_cyst_container_layout.addWidget(self.add_cyst_inputs_container)
 
         self.depth_spin_box = SpinBox(label_text="Depth")
         self.lateral_spin_box = SpinBox(label_text="Lateral")
+        self.radius_spin_box = SpinBox(label_text="Radius")
         self.depth_spin_box.set_font(font)
         self.lateral_spin_box.set_font(font)
-        self.add_point_inputs_container_layout.addWidget(self.depth_spin_box)
-        self.add_point_inputs_container_layout.addWidget(self.lateral_spin_box)
+        self.radius_spin_box.set_font(font)
+        self.add_cyst_inputs_container_layout.addWidget(self.depth_spin_box)
+        self.add_cyst_inputs_container_layout.addWidget(self.lateral_spin_box)
+        self.add_cyst_inputs_container_layout.addWidget(self.radius_spin_box)
 
-        self.add_point_button = QPushButton("Add Point")
-        self.add_point_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.add_cyst_button = QPushButton("Add Cyst")
+        self.add_cyst_button.setCursor(Qt.CursorShape.PointingHandCursor)
         font.setWeight(QFont.Weight.Medium) 
-        self.add_point_button.setFont(font)
-        self.add_point_button.setObjectName("add_point_button")
-        self.add_point_container_layout.addWidget(self.add_point_button)
-        self.add_point_button.clicked.connect(self.on_point_added)
+        self.add_cyst_button.setFont(font)
+        self.add_cyst_button.setObjectName("add_cyst_button")
+        self.add_cyst_container_layout.addWidget(self.add_cyst_button)
+        self.add_cyst_button.clicked.connect(self.on_cyst_added)
 
         self.item_list_container = QWidget()
         self.item_list_container.setObjectName("item_list_container")
@@ -89,7 +92,7 @@ class Sidebar(QWidget):
         font = QFont("Segoe UI", 12)
         font.setWeight(QFont.Weight.Medium) 
 
-        self.item_list_header = QLabel("Points")
+        self.item_list_header = QLabel("Cysts")
         self.item_list_header.setFont(font)
         self.item_list_container_layout.addWidget(self.item_list_header)
         self.item_list_header.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -98,15 +101,16 @@ class Sidebar(QWidget):
         self.item_list_container_layout.addWidget(self.item_list, stretch=1)
 
 
-    def on_point_added(self):
-        new_point = PointItem(
+    def on_cyst_added(self):
+        new_cyst = CystItem(
             depth= self.depth_spin_box.value(),
-            lateral= self.lateral_spin_box.value()
+            lateral= self.lateral_spin_box.value(),
+            radius = self.radius_spin_box.value()
         )
         
-        self.item_list.append_item(new_point)
+        self.item_list.append_item(new_cyst)
 
-        show_toast(self.main_window, "Point Added", f"({self.depth_spin_box.value()}, {self.lateral_spin_box.value()}) added successfully.")
+        show_toast(self.main_window, "Cyst Added",f"Cyst (d={self.depth_spin_box.value()}, l={self.lateral_spin_box.value()}, r={self.radius_spin_box.value()}) added successfully.")
 
 
     def on_speed_changed(self, speed):
