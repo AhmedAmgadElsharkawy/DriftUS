@@ -5,10 +5,6 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt5.QtGui import QColor, QFont
 
 class ImageViewer(QWidget):
-    roi_changed = QtCore.pyqtSignal(object)      
-    line_changed = QtCore.pyqtSignal(object) 
-    select_clicked = QtCore.pyqtSignal()     
-
     def __init__(self, main_window, header = "Viewer"):
         super().__init__()
 

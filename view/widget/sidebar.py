@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
     QLabel, QSizePolicy
 )
 from PyQt5.QtGui import QFont
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 
 
 from view.widget.scrollable_list import ScrollableList
@@ -11,6 +11,8 @@ from view.widget.spin_box import SpinBox
 from model.point_item import PointItem
 
 class Sidebar(QWidget):
+    speed_changed = pyqtSignal(float)
+
     def __init__(self,main_window):
         super().__init__()
         self.setFixedWidth(330)
@@ -41,6 +43,7 @@ class Sidebar(QWidget):
         font.setWeight(QFont.Weight.Normal) 
 
         self.speed_spin_box = SpinBox(label_text="Speed")
+        self.speed_spin_box.value_changed.connect(self.on_speed_changed)
         self.speed_spin_box.set_font(font)
         self.controls_container_layout.addWidget(self.speed_spin_box)
 
@@ -99,5 +102,9 @@ class Sidebar(QWidget):
         )
         
         self.item_list.append_item(new_point)
+
+
+    def on_speed_changed(self, speed):
+        self.speed_changed.emit(speed)
 
                 
