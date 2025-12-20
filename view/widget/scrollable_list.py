@@ -31,7 +31,7 @@ class ScrollableList(QWidget):
 
         font = QFont("Segoe UI", 12)
         font.setWeight(QFont.Weight.Light) 
-        self.no_items_label = QLabel("No points added")
+        self.no_items_label = QLabel("No cysts added")
         self.no_items_label.setFont(font)
         self.main_widget_layout.addWidget(self.no_items_label)
         self.no_items_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -66,7 +66,7 @@ class ScrollableList(QWidget):
 
     def delete_item(self, index):
         if 0 <= index < len(self.items):
-            show_toast(self.main_window, "Point Deleted", f"({self.items[index].get_depth()}, {self.items[index].get_lateral()}) deleted successfully.")
+            show_toast(self.main_window, "Cyst Deleted", f"Cyst (d={self.items[index].get_depth()}, l={self.items[index].get_lateral()}, r={self.items[index].get_radius()}) deleted successfully.")
             del self.items[index]
             for i, s in enumerate(self.items):
                 s.index = i
