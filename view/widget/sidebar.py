@@ -63,9 +63,9 @@ class Sidebar(QWidget):
         self.add_cyst_inputs_container_layout.setSpacing(8)
         self.add_cyst_container_layout.addWidget(self.add_cyst_inputs_container)
 
-        self.depth_spin_box = SpinBox(label_text="Depth")
-        self.lateral_spin_box = SpinBox(label_text="Lateral")
-        self.radius_spin_box = SpinBox(label_text="Radius")
+        self.depth_spin_box = SpinBox(label_text="Depth", decimals=3, initial_value=0.025)
+        self.lateral_spin_box = SpinBox(label_text="Lateral", decimals=3, initial_value=-0.010)
+        self.radius_spin_box = SpinBox(label_text="Radius", decimals=3, initial_value=0.004)
         self.depth_spin_box.set_font(font)
         self.lateral_spin_box.set_font(font)
         self.radius_spin_box.set_font(font)
@@ -108,6 +108,13 @@ class Sidebar(QWidget):
             radius = self.radius_spin_box.value()
         )
         
+        is_cyst_exists = self.main_window.phantom_controller.is_cyst_exists(new_cyst)
+
+        if is_cyst_exists:
+            show_toast(self.main_window, "Cyst Already Exists",f"Cyst (d={self.depth_spin_box.value()}, l={self.lateral_spin_box.value()}, r={self.radius_spin_box.value()}) already exists.")
+            return
+        
+        self.main_window.phantom_controller.add_cyst(new_cyst)
         self.item_list.append_item(new_cyst)
 
         show_toast(self.main_window, "Cyst Added",f"Cyst (d={self.depth_spin_box.value()}, l={self.lateral_spin_box.value()}, r={self.radius_spin_box.value()}) added successfully.")

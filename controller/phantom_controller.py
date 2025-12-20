@@ -1,4 +1,5 @@
 import numpy as np
+from model.cyst_item import CystItem
 
 class PhantomController:
     def __init__(self, main_window):
@@ -9,7 +10,7 @@ class PhantomController:
 
         # Phantom properties
         self.true_speed = 1540.0  # m/s
-        self.true_width = 0.04  # m
+        self.true_width = 0.08  # m
         self.max_depth = 0.08  # m
 
         # Generate initial phantom
@@ -41,10 +42,20 @@ class PhantomController:
         cysts = []
         # Define 2-3 cysts at different depths for good visualization
         # Each cyst: (center_x, center_z, radius)
-        cysts.append({'x': -0.010, 'z': 0.025, 'radius': 0.004})  # Left cyst at mid-depth
-        cysts.append({'x': 0.008, 'z': 0.045, 'radius': 0.005})   # Right cyst deeper
-        cysts.append({'x': 0.002, 'z': 0.062, 'radius': 0.003})   # Small cyst very deep
+        # cysts.append({'x': -0.010, 'z': 0.025, 'radius': 0.004})  # Left cyst at mid-depth
+        # cysts.append({'x': 0.008, 'z': 0.045, 'radius': 0.005})   # Right cyst deeper
+        # cysts.append({'x': 0.002, 'z': 0.062, 'radius': 0.003})   # Small cyst very deep
         return cysts
+    
+    def is_cyst_exists(self, cyst: CystItem):
+        for existing_cyst in self.cysts:
+            if existing_cyst['x'] == cyst.get_lateral() and existing_cyst['z'] == cyst.get_depth() and existing_cyst['radius'] == cyst.get_radius():
+                return True
+        return False
+    
+    def add_cyst(self, cyst: CystItem):
+        self.cysts.append({"x": cyst.get_lateral(), "z": cyst.get_depth(), "radius": cyst.get_radius()})
+        print(self.cysts)
 
     def _point_in_cyst(self, x, z):
         """
@@ -59,17 +70,11 @@ class PhantomController:
                 return i
         return -1
 
-    def update_phantom_(self, points_list=[]):
-        # the points list is a list of PointItem Class (look model.point_item file)
-        # add logic here
-        # to show draw the output image call the next line
-        # self.main_window.phantom_image_viewer.setset_image(image_matrix)
-        pass
-
     def update_phantom(self, points_list):
         """
         Combines background speckle with cysts and user-added points (targets).
         """
+        print("Updating Phantom...")
         # Parse User Points from the GUI List
         user_x = []
         user_z = []
@@ -82,7 +87,7 @@ class PhantomController:
 
             user_z.append(z_m)
             user_x.append(x_m)
-            user_amp.append(2.0)
+            user_amp.append(0.02)
 
         # Remove speckles inside cysts (cysts are anechoic)
         speckles_x = self.speckles_x.copy()
@@ -121,6 +126,7 @@ class PhantomController:
 
         #  Generate "Ground Truth" Image
         # We visualize using the TRUE positions (total_x, total_z)
+        print(total_amp)
         image_matrix = self.points_to_image(total_x, total_z, total_amp, cysts=None)
 
         #  Send to Viewer
