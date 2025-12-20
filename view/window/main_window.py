@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QHBoxLayout,
 )
-
+from PyQt5.QtCore import QTimer
 from view.widget.metric_widget import MetricWidget
 from view.widget.sidebar import Sidebar 
 from view.widget.image_viewer import ImageViewer
@@ -92,3 +92,5 @@ class MainWindow(QMainWindow):
         self.showMaximized()
 
         apply_stylesheet(self, "light")
+
+        QTimer.singleShot(100, lambda: self.phantom_controller.update_phantom([]))
