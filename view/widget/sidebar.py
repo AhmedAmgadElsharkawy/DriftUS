@@ -45,7 +45,7 @@ class Sidebar(QWidget):
         font = QFont("Segoe UI", 10)
         font.setWeight(QFont.Weight.Normal) 
 
-        self.speed_spin_box = SpinBox(label_text="Speed")
+        self.speed_spin_box = SpinBox(label_text="Speed", initial_value=1540)
         self.speed_spin_box.value_changed.connect(self.on_speed_changed)
         self.speed_spin_box.set_font(font)
         self.controls_container_layout.addWidget(self.speed_spin_box)

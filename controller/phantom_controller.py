@@ -55,7 +55,6 @@ class PhantomController:
     
     def add_cyst(self, cyst: CystItem):
         self.cysts.append({"x": cyst.get_lateral(), "z": cyst.get_depth(), "radius": cyst.get_radius()})
-        print(self.cysts)
 
     def delete_cyst(self, cyst: CystItem):
         for i, existing_cyst in enumerate(self.cysts):
@@ -80,7 +79,6 @@ class PhantomController:
         """
         Combines background speckle with cysts and user-added points (targets).
         """
-        print("Updating Phantom...")
         # Parse User Points from the GUI List
         user_x = []
         user_z = []
@@ -132,7 +130,6 @@ class PhantomController:
 
         #  Generate "Ground Truth" Image
         # We visualize using the TRUE positions (total_x, total_z)
-        print(total_amp)
         image_matrix = self.points_to_image(total_x, total_z, total_amp, cysts=None)
 
         #  Send to Viewer
