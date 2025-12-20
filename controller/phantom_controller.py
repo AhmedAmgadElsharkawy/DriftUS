@@ -57,6 +57,12 @@ class PhantomController:
         self.cysts.append({"x": cyst.get_lateral(), "z": cyst.get_depth(), "radius": cyst.get_radius()})
         print(self.cysts)
 
+    def delete_cyst(self, cyst: CystItem):
+        for i, existing_cyst in enumerate(self.cysts):
+            if existing_cyst['x'] == cyst.get_lateral() and existing_cyst['z'] == cyst.get_depth() and existing_cyst['radius'] == cyst.get_radius():
+                del self.cysts[i]
+                return
+
     def _point_in_cyst(self, x, z):
         """
         Check if a point (x, z) is inside any cyst.

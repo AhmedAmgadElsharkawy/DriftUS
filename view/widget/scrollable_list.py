@@ -66,6 +66,7 @@ class ScrollableList(QWidget):
 
     def delete_item(self, index):
         if 0 <= index < len(self.items):
+            self.main_window.phantom_controller.delete_cyst(self.items[index])
             show_toast(self.main_window, "Cyst Deleted", f"Cyst (d={self.items[index].get_depth()}, l={self.items[index].get_lateral()}, r={self.items[index].get_radius()}) deleted successfully.")
             del self.items[index]
             for i, s in enumerate(self.items):
