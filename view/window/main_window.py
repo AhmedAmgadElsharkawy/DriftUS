@@ -73,10 +73,6 @@ class MainWindow(QMainWindow):
         self.quantitative_metrics_container_layout.addWidget(self.m1)
         self.m2 = MetricWidget("Metric 2")
         self.quantitative_metrics_container_layout.addWidget(self.m2)
-        self.m3 = MetricWidget("Metric 3")
-        self.quantitative_metrics_container_layout.addWidget(self.m3)
-        self.m4 = MetricWidget("Metric 4")
-        self.quantitative_metrics_container_layout.addWidget(self.m4)
 
 
         self.body_container_layout.addWidget(self.quantitative_metrics_container, stretch=0)

@@ -11,12 +11,10 @@ class MetricsController:
         # Set clear, unambiguous metric names
         self.main_window.m1.label.setText("Axial Magnification:")
         self.main_window.m2.label.setText("Mean Depth Shift:")
-        self.main_window.m3.label.setText("Distance Error:")
-        self.main_window.m4.label.setText("Area Error:")
 
     def update_metrics(self, _=None):
         """
-        Calculate and update the 4 core geometric distortion metrics.
+        Calculate and update the 2 core geometric distortion metrics.
         All metrics directly quantify clinically relevant distortions.
         """
         cysts = self.main_window.sidebar.item_list.get_items()
@@ -34,13 +32,11 @@ class MetricsController:
         # Calculate all metrics
         metrics = {
             'axial_magnification': axial_magnification,
-            'mean_depth_shift_mm': self._calc_mean_depth_shift(cysts, axial_magnification),
-            'distance_error_pct': self._calc_distance_error(cysts, axial_magnification),
-            'area_error_pct': self._calc_area_error(axial_magnification)
+            'mean_depth_shift_mm': self._calc_mean_depth_shift(cysts, axial_magnification)
         }
         
         # Update UI
-        self._update_displays(metrics, len(cysts))
+        self._update_displays(metrics)
 
     def _calc_mean_depth_shift(self, cysts, magnification):
         """
@@ -67,69 +63,7 @@ class MetricsController:
         
         return np.mean(depth_shifts)
 
-    def _calc_distance_error(self, cysts, magnification):
-        """
-        Metric 3: Inter-target Axial Distance Error (%)
-        
-        Formula: For each pair of cysts, calculate:
-                 (d_reconstructed - d_true) / d_true × 100%
-                 where d = |z_a - z_b| (vertical separation only)
-        
-        Physical meaning: "Vertical spacing between targets is off by X%"
-        
-        Clinical relevance:
-        - Affects multi-focal lesion assessment
-        - Important for measuring disease spread
-        - Critical for planning multi-target procedures
-        
-        Returns None if fewer than 2 cysts (distance undefined)
-        """
-        if len(cysts) < 2:
-            return None
-        
-        distance_errors = []
-        
-        # Calculate all pairwise vertical separations
-        for i in range(len(cysts)):
-            for j in range(i + 1, len(cysts)):
-                z_a_true = cysts[i].get_depth()
-                z_b_true = cysts[j].get_depth()
-                
-                # True vertical separation
-                d_true = abs(z_a_true - z_b_true)
-                
-                # Reconstructed vertical separation
-                # Both depths scale by magnification, so separation also scales
-                d_reconstructed = d_true * magnification
-                
-                # Percentage error
-                error_pct = (d_reconstructed - d_true) / d_true * 100
-                distance_errors.append(error_pct)
-        
-        return np.mean(distance_errors)
-
-    def _calc_area_error(self, magnification):
-        """
-        Metric 4: Cyst Area Error (%)
-        
-        Formula: (magnification - 1) × 100%
-        
-        Physical meaning:
-        - True cyst: Circle with area = π r²
-        - Reconstructed: Ellipse with area = π r × (r × magnification) = π r² × magnification
-        - Error: (Area_reconstructed - Area_true) / Area_true × 100%
-        
-        Clinical relevance:
-        - Affects tumor volume calculations
-        - Important for monitoring lesion size changes
-        - Critical for surgical resection planning
-        
-        Note: This assumes isotropic cysts (circular in cross-section)
-        """
-        area_error_pct = (magnification - 1.0) * 100
-        return area_error_pct
-
-    def _update_displays(self, metrics, num_cysts):
+    def _update_displays(self, metrics):
         """
         Update the metric widget displays with calculated values.
         """
@@ -146,17 +80,6 @@ class MetricsController:
         # Metric 2: Mean Depth Shift (mm)
         shift = metrics['mean_depth_shift_mm']
         self.main_window.m2.set_value(f"{shift:.3f} mm")
-        
-        # Metric 3: Distance Error (%)
-        if metrics['distance_error_pct'] is not None:
-            dist_err = metrics['distance_error_pct']
-            self.main_window.m3.set_value(f"{dist_err:+.2f}%")
-        else:
-            self.main_window.m3.set_value("Need 2+ cysts")
-        
-        # Metric 4: Area Error (%)
-        area_err = metrics['area_error_pct']
-        self.main_window.m4.set_value(f"{area_err:+.2f}%")
 
     def _reset_metrics(self):
         """
@@ -164,5 +87,3 @@ class MetricsController:
         """
         self.main_window.m1.set_value("N/A")
         self.main_window.m2.set_value("N/A")
-        self.main_window.m3.set_value("N/A")
-        self.main_window.m4.set_value("N/A")
