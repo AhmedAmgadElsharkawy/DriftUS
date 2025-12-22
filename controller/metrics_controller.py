@@ -54,11 +54,11 @@ class MetricsController:
         depth_shifts = []
         
         for cyst in cysts:
-            z_true = cyst.get_depth()  # in meters
-            z_reconstructed = z_true * magnification
+            z_true = cyst.get_depth()  # in m
+            z_reconstructed = z_true * magnification  # in m
             
             # Absolute shift in millimeters
-            shift_mm = abs(z_reconstructed - z_true) * 1000
+            shift_mm = abs(z_reconstructed - z_true) * 1000 # convert to mm
             depth_shifts.append(shift_mm)
         
         return np.mean(depth_shifts)

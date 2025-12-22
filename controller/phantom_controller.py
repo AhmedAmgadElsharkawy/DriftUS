@@ -123,6 +123,5 @@ class PhantomController:
         # Apply Log Compression (Ultrasound images are always log-compressed)
         # Log(1 + pixel) to handle zeros safely
         image = np.log1p(image)
-
         image = np.rot90(image , k=1)
         return image

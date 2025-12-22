@@ -6,19 +6,19 @@ class CystItem:
         self.name = f"Cyst (d={depth}, l={lateral}, r={radius})"
 
     def get_depth(self):
-        return self.depth
+        return self.depth / 1000
     
     def set_depth(self, depth):
         self.depth = depth
 
     def get_lateral(self):
-        return self.lateral
+        return self.lateral / 1000
     
     def set_lateral(self, lateral):
         self.lateral = lateral
 
     def get_radius(self):
-        return self.radius
+        return self.radius / 1000
     
     def set_radius(self, radius):
         self.radius = radius

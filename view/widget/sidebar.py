@@ -66,9 +66,9 @@ class Sidebar(QWidget):
         font = QFont("Segoe UI", 9)
         font.setWeight(QFont.Weight.Normal) 
 
-        self.depth_spin_box = SpinBox(label_text="Depth (mm)", decimals=3, initial_value=0.025)
-        self.lateral_spin_box = SpinBox(label_text="Lateral (mm)", decimals=3, initial_value=-0.010)
-        self.radius_spin_box = SpinBox(label_text="Radius (mm)", decimals=3, initial_value=0.004)
+        self.depth_spin_box = SpinBox(label_text="Depth (mm)", decimals=2, initial_value=25)
+        self.lateral_spin_box = SpinBox(label_text="Lateral (mm)", decimals=2, initial_value=-10)
+        self.radius_spin_box = SpinBox(label_text="Radius (mm)", decimals=2, initial_value=4)
         self.depth_spin_box.set_font(font)
         self.lateral_spin_box.set_font(font)
         self.radius_spin_box.set_font(font)
