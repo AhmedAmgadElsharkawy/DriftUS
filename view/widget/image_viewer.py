@@ -57,15 +57,10 @@ class ImageViewer(QWidget):
         # Remove existing label if it exists to avoid duplicates
         if self.transducer_label is not None:
             self.image_view.removeItem(self.transducer_label)
-
-        # Create a TextItem with HTML for styling (Blue color to match theme)
-        # The arrow ▼ points down from the top
+        
         html_text = '<div style="text-align: center"><span style="color: #0071df; font-weight: bold; font-size: 10pt;">▼ Transducer</span></div>'
         self.transducer_label = pg.TextItem(html=html_text, anchor=(0.5, 0))
 
-        # Position at the top center
-        # X = width / 2 (Center)
-        # Y = height (Top, assuming invertY is False so Y increases upwards)
         self.transducer_label.setPos(width / 2, height)
 
         self.image_view.addItem(self.transducer_label)

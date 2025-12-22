@@ -20,20 +20,13 @@ class ReconstructionController():
         lateral_pos = phantom_ctrl.current_x 
 
         # 3. Calculate Reconstructed Depth
-        # Formula: Depth = (Time * Assumed_Speed) / 2
-        # If assumed_speed > true_speed (1540), objects appear deeper (Stretched)
-        # If assumed_speed < true_speed (1540), objects appear shallower (Compressed)
         reconstructed_z = (times * assumed_speed) / 2.0
 
         # 4. Generate the Reconstructed Image
-        # We reuse the scan conversion logic from the phantom controller.
-        # CRITICAL: We pass cysts=None. We do NOT want to draw the "True" cysts.
-        # We want the "voids" in the speckle pattern to appear distorted naturally.
         reconstructed_image = phantom_ctrl.points_to_image(
             lateral_pos, 
             reconstructed_z, 
             amps, 
-            cysts=None 
         )
 
         # 5. Display the Image
