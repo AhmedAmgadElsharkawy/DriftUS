@@ -45,7 +45,7 @@ class Sidebar(QWidget):
         font = QFont("Segoe UI", 10)
         font.setWeight(QFont.Weight.Normal) 
 
-        self.speed_spin_box = SpinBox(label_text="Speed", initial_value=1540)
+        self.speed_spin_box = SpinBox(label_text="Speed (m/s)", initial_value=1540)
         self.speed_spin_box.value_changed.connect(self.on_speed_changed)
         self.speed_spin_box.set_font(font)
         self.controls_container_layout.addWidget(self.speed_spin_box)
@@ -63,15 +63,21 @@ class Sidebar(QWidget):
         self.add_cyst_inputs_container_layout.setSpacing(8)
         self.add_cyst_container_layout.addWidget(self.add_cyst_inputs_container)
 
-        self.depth_spin_box = SpinBox(label_text="Depth", decimals=3, initial_value=0.025)
-        self.lateral_spin_box = SpinBox(label_text="Lateral", decimals=3, initial_value=-0.010)
-        self.radius_spin_box = SpinBox(label_text="Radius", decimals=3, initial_value=0.004)
+        font = QFont("Segoe UI", 9)
+        font.setWeight(QFont.Weight.Normal) 
+
+        self.depth_spin_box = SpinBox(label_text="Depth (mm)", decimals=3, initial_value=0.025)
+        self.lateral_spin_box = SpinBox(label_text="Lateral (mm)", decimals=3, initial_value=-0.010)
+        self.radius_spin_box = SpinBox(label_text="Radius (mm)", decimals=3, initial_value=0.004)
         self.depth_spin_box.set_font(font)
         self.lateral_spin_box.set_font(font)
         self.radius_spin_box.set_font(font)
         self.add_cyst_inputs_container_layout.addWidget(self.depth_spin_box)
         self.add_cyst_inputs_container_layout.addWidget(self.lateral_spin_box)
         self.add_cyst_inputs_container_layout.addWidget(self.radius_spin_box)
+
+        font = QFont("Segoe UI", 10)
+        font.setWeight(QFont.Weight.Normal) 
 
         self.add_cyst_button = QPushButton("Add Cyst")
         self.add_cyst_button.setCursor(Qt.CursorShape.PointingHandCursor)
