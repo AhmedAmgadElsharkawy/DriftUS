@@ -10,7 +10,7 @@
 - [Contributors](#contributors)
 
 ## Demo
-demo link
+[demo link](https://github.com/user-attachments/assets/b0b88572-7285-4047-ab31-79b8865ff35b)
 
 ## Prerequisites
 
@@ -18,43 +18,38 @@ demo link
 
 ## Installation
 
-
-
 1. **Clone the repository:**
 
    ``````
    git clone https://github.com/AhmedAmgadElsharkawy/DriftUS.git
    ``````
 
-2. **Create Virtual Environment:**
-
-   ``````
-   python -m venv drift_us_venv
-   ``````
-
-3. **Install The Dependincies:**
+2. **Install The Dependincies:**
     ``````
     pip install -r requirements.txt
     ``````
 
-4. **Run The App:**
+3. **Run The App:**
 
     ``````
     python main.py
     ``````
-> **Developer Note:**  
-> If you install any new packages while developing, make sure to activate the virtual environment and run the following command to update `requirements.txt`:
->
-> ```bash
-> pip freeze > requirements.txt
-> ```
-> This ensures that all dependencies are correctly listed for reproducibility.
 
 ## Features  
 
-- **Feature 1:**
-
-    Description.
+- **Speed Assumption Simulation:**
+    Simulate the effect of mismatch between the assumed ultrasound speed and the actual tissue speed on the reconstructed image.
+- **Customizable Phantom Generation:**
+    Generate phantoms with background speckle noise to simulate tissue texture and dynamically add cysts by specifying their depth, lateral position, and radius.
+- **Dual Viewer Comparison:**
+    Two viewers are displayed side-by-side to compare the original phantom (at true speed 1540 m/s) against the reconstructed image based on the user-entered speed.
+- **Geometric Distortion Visualization:**
+    Observe how assuming a speed higher than reality causes image stretching, while a lower speed causes compression of cyst dimensions (lateral and depth).
+- **Quantitative Metrics:**
+    - **Axial Magnification:** Calculates the distortion factor (Assumed Speed / Original Speed) to quantify the amount of stretching or compression.
+    - **Mean Depth Shift:** Measures the positional error of the cysts caused by the incorrect speed assumption.
+- **Interactive Controls:**
+    Input fields allow users to modify the assumed speed of sound and cyst parameters with real-time updates to the visualization and metrics.
 
 
 ## Contributors
